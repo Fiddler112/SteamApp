@@ -15,7 +15,19 @@ class SearchPlayerFragment : Fragment() {
         val view: View = inflater.inflate(R.layout.fragment_searchplayer, container, false)
         val name: TextView = view.findViewById(R.id.editName)
         val button: Button = view.findViewById(R.id.button)
+
+        button.setOnClickListener {
+            val newGamefragment = GameListFragment()
+            val fragmentTransaction = activity!!.supportFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.container, newGamefragment)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
         return view
+    }
+
+    companion object {
+        fun newInstance(): SearchPlayerFragment = SearchPlayerFragment()
     }
 
 
