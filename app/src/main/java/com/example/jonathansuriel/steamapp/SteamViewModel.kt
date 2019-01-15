@@ -9,10 +9,26 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.Job
 import kotlin.coroutines.CoroutineContext
 
-class SteamViewModel(private val steamRepository: SteamRepository) : ViewModel() {
+class SteamViewModel(application: Application) : AndroidViewModel(application) {
 
-    lateinit var steamitems: LiveData<List<Steam>>
+    private var parentJob = Job()
+    private val coroutineContext: CoroutineContext
+        get() = parentJob + Dispatchers.Default
+    private val scope = CoroutineScope(coroutineContext)
+
+    private val steamRepository: SteamRepository
+
+    var steamitems: LiveData<List<Steam>>
+
+    init {
+        val steamDao = SteamDatabase.getDatabase(application, scope).steamDao()
+        steamRepository = SteamRepository(steamDao)
+        steamitems = steamRepository.SteamItems
+    }
+
     fun getSteamList() = steamRepository.getSteam()
 
-    fun addSteamItem(steam: Steam) = steamRepository.addSteam(steam)
+    fun addSteamItem(steam: Steam) = scope.launch(Dispatchers.IO) {
+        steamRepository.addSteam(steam)
+    }
 }

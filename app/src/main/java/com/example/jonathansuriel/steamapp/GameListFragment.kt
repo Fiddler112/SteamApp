@@ -27,7 +27,13 @@ class GameListFragment : Fragment() {
             steam?.let {adapter.setGames(it)}
         })
 
+
+
         return view
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
     }
 
   //  companion object {

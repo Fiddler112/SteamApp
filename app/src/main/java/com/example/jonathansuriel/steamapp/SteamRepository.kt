@@ -4,9 +4,9 @@ import android.arch.lifecycle.LiveData
 import android.app.Application
 import android.support.annotation.WorkerThread
 
-class SteamRepository private constructor(private val SteamDao: SteamDAO) {
+class SteamRepository (private val SteamDao: SteamDAO) {
 
-    lateinit var SteamItems: LiveData<List<Steam>>
+    var SteamItems: LiveData<List<Steam>> = SteamDao.getList()
 
     @WorkerThread
     fun addSteam(steam: Steam) {

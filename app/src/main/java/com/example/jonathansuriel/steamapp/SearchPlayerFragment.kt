@@ -16,6 +16,7 @@ class SearchPlayerFragment : Fragment() {
         val name: TextView = view.findViewById(R.id.editName)
         val button: Button = view.findViewById(R.id.button)
 
+
         button.setOnClickListener {
             val newGamefragment = GameListFragment()
             val fragmentTransaction = activity!!.supportFragmentManager.beginTransaction()
