@@ -1,9 +1,6 @@
 package com.example.jonathansuriel.steamapp
 
-import android.content.Context
-import android.support.v7.view.menu.ActionMenuItemView
 import android.support.v7.widget.RecyclerView
-import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +14,7 @@ class GameListAdapter internal constructor(
     private var games = emptyList<Steam>()
 
     inner class GameViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val gameItemViewTitle: TextView = itemView.findViewById(R.id.mTitle)
+        val gameItemViewTitle: TextView = itemView.findViewById(R.id.mTitlee)
         val gameItemViewHours: TextView = itemView.findViewById(R.id.mHours)
     }
 

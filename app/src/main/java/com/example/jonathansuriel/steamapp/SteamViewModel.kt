@@ -7,6 +7,7 @@ import android.arch.lifecycle.ViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Job
+import okhttp3.Dispatcher
 import kotlin.coroutines.CoroutineContext
 
 class SteamViewModel(application: Application) : AndroidViewModel(application) {
@@ -26,9 +27,15 @@ class SteamViewModel(application: Application) : AndroidViewModel(application) {
         steamitems = steamRepository.SteamItems
     }
 
-    fun getSteamList() = steamRepository.getSteam()
-
-    fun addSteamItem(steam: Steam) = scope.launch(Dispatchers.IO) {
-        steamRepository.addSteam(steam)
+        fun insert(steam: Steam) = scope.launch(Dispatchers.IO) {
+            steamRepository.addSteam(steam)
+        }
+    fun delete(game: Steam) = scope.launch(Dispatchers.IO) {
+        steamRepository.delete(game)
     }
-}
+
+    override fun onCleared() {
+        super.onCleared()
+        parentJob.cancel()
+    }
+    }

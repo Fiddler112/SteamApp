@@ -13,5 +13,9 @@ class SteamRepository (private val SteamDao: SteamDAO) {
         SteamDao.addItem(steam)
     }
     @WorkerThread
+    fun delete(game:Steam){
+        SteamDao.delete(game)
+    }
+    @WorkerThread
     fun getSteam() = SteamDao.getList()
 }
